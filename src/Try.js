@@ -9,6 +9,10 @@ function Try() {
     firstName: "",
     lastName: "",
   });
+  const [signupData, setSignupData] = React.useState({
+    userName: "",
+    email: "",
+  });
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleChange = (event) => {
@@ -19,6 +23,13 @@ function Try() {
     dispatch(console({ ...formData }));
     dispatch(tryPost({ ...formData }));
     navigate("/");
+  };
+  const handleSignupChange = (event) => {
+    event.preventDefault();
+    setSignupData({ ...signupData, [event.target.name]: event.target.value });
+  };
+  const handleSubmitSignup = (event) => {
+    event.preventDefault();
   };
   return (
     <div>
@@ -31,12 +42,20 @@ function Try() {
         <h2>Email</h2>
         <input type="text" name="email" onChange={handleChange} />
         <h2>User Name</h2>
-        <input type="text" name="userName" onChange={handleChange} />
+        <input type="text" name="user" onChange={handleChange} />
         <h2>Password</h2>
         <input type="text" name="password" onChange={handleChange} />
         <button type="submit" onClick={handleSubmit}>
           Submit
         </button>
+      </form>
+      <h1>USER TEST</h1>
+      <form>
+        <h2>userName</h2>
+        <input type="text" name="userName" onChange={handleSignupChange} />
+        <h2>Email</h2>
+        <input type="email" name="email" onChange={handleSignupChange} />
+        <button type="submit" onClick={handleSubmitSignup} />
       </form>
     </div>
   );

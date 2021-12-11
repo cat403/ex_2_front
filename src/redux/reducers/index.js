@@ -5,6 +5,11 @@ const reducer = (state = {}, action) => {
       return state;
     case "TRYPOST":
       return { ...action.payload, canYouSeeMe: action.payload.firstName };
+    case "REGISTER":
+      return {
+        sucess: action.payload.success,
+        userName: action.payload.userName,
+      };
     default:
       return state;
   }

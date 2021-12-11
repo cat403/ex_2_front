@@ -12,3 +12,11 @@ export const tryPost = (post) => async (dispatch) => {
     window.console.error(error);
   }
 };
+export const sendSignup = (userInfo) => async (dispatch) => {
+  try {
+    const { response } = await api.sendSignup(userInfo);
+    dispatch({ type: "REGISTER", payload: response });
+  } catch (error) {
+    window.console.error(error);
+  }
+};
