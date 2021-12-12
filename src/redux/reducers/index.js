@@ -1,4 +1,7 @@
-const reducer = (state = {}, action) => {
+const reducer = (
+  state = { userName: "mike", error: "hi", userId: "w" },
+  action
+) => {
   switch (action.type) {
     case "CONSOLE":
       console.log("in reducer", action.payload);
@@ -6,10 +9,13 @@ const reducer = (state = {}, action) => {
     case "TRYPOST":
       return { ...action.payload, canYouSeeMe: action.payload.firstName };
     case "REGISTER":
-      return {
-        sucess: action.payload.success,
-        userName: action.payload.userName,
-      };
+      window.console.log(action.payload);
+      //   return {
+      //     error: action.payload.error,
+      //     userName: action.payload.userName,
+      //     userId: action.payload._id,
+      //   };
+      return state;
     default:
       return state;
   }

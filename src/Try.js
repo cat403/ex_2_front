@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { console } from "./redux/actions";
 import { tryPost } from "./redux/actions";
+import { sendSignup } from "./redux/actions";
 function Try() {
   let canYouSeeMe = useSelector((state) => state.canYouSeeMe);
   const [formData, setFormData] = React.useState({
@@ -13,6 +14,11 @@ function Try() {
     userName: "",
     email: "",
   });
+  let error = useSelector((state) => state.error);
+  window.console.log(
+    "is error",
+    useSelector((state) => state)
+  );
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleChange = (event) => {
@@ -30,6 +36,7 @@ function Try() {
   };
   const handleSubmitSignup = (event) => {
     event.preventDefault();
+    dispatch(sendSignup(signupData));
   };
   return (
     <div>
@@ -50,12 +57,17 @@ function Try() {
         </button>
       </form>
       <h1>USER TEST</h1>
+      <p>User Name : {"a"}</p>
+      <p>User Id: {"b"} </p>
+      <p>ERROR: {error}</p>
       <form>
         <h2>userName</h2>
         <input type="text" name="userName" onChange={handleSignupChange} />
         <h2>Email</h2>
         <input type="email" name="email" onChange={handleSignupChange} />
-        <button type="submit" onClick={handleSubmitSignup} />
+        <button type="submit" onClick={handleSubmitSignup}>
+          Submit Signup
+        </button>
       </form>
     </div>
   );
