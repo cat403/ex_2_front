@@ -9,13 +9,12 @@ const reducer = (
     case "TRYPOST":
       return { ...action.payload, canYouSeeMe: action.payload.firstName };
     case "REGISTER":
-      window.console.log(action.payload);
-      //   return {
-      //     error: action.payload.error,
-      //     userName: action.payload.userName,
-      //     userId: action.payload._id,
-      //   };
-      return state;
+      return {
+        ...state,
+        ...action.payload,
+      };
+    case "CHECK_DB_AVAILABILITY":
+      return { ...state, available: action.payload.available };
     default:
       return state;
   }

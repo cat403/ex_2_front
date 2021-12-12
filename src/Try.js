@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { console } from "./redux/actions";
 import { tryPost } from "./redux/actions";
 import { sendSignup } from "./redux/actions";
+import { checkUserAvailability } from "./redux/actions";
 function Try() {
   let canYouSeeMe = useSelector((state) => state.canYouSeeMe);
   const [formData, setFormData] = React.useState({
@@ -14,11 +15,8 @@ function Try() {
     userName: "",
     email: "",
   });
-  let error = useSelector((state) => state.error);
-  window.console.log(
-    "is error",
-    useSelector((state) => state)
-  );
+  let state = useSelector((state) => state);
+  window.console.log(state);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleChange = (event) => {
@@ -31,8 +29,14 @@ function Try() {
     navigate("/");
   };
   const handleSignupChange = (event) => {
+    window.console.log("doc", document.getElementById("userName").value);
     event.preventDefault();
     setSignupData({ ...signupData, [event.target.name]: event.target.value });
+    dispatch(
+      checkUserAvailability({
+        userName: document.getElementById("userName").value,
+      })
+    );
   };
   const handleSubmitSignup = (event) => {
     event.preventDefault();
@@ -57,12 +61,18 @@ function Try() {
         </button>
       </form>
       <h1>USER TEST</h1>
-      <p>User Name : {"a"}</p>
-      <p>User Id: {"b"} </p>
-      <p>ERROR: {error}</p>
+      <p>User Name : {state.userName}</p>
+      <p>User Id: {state._id} </p>
+      <p>ERROR: {state.error}</p>
       <form>
         <h2>userName</h2>
-        <input type="text" name="userName" onChange={handleSignupChange} />
+        <input
+          type="text"
+          name="userName"
+          id="userName"
+          onChange={handleSignupChange}
+        />
+        <p>is available: {state.available ? "True" : "False"}</p>
         <h2>Email</h2>
         <input type="email" name="email" onChange={handleSignupChange} />
         <button type="submit" onClick={handleSubmitSignup}>
