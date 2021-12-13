@@ -6,6 +6,16 @@ import { tryPost } from "./redux/actions";
 import { sendSignup } from "./redux/actions";
 import { checkUserAvailability } from "./redux/actions";
 function Try() {
+  const debounce = (func, timeout = 300) => {
+    let timer;
+    return (...args) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        timer = null;
+        func(...args);
+      }, timeout);
+    };
+  };
   let canYouSeeMe = useSelector((state) => state.canYouSeeMe);
   const [formData, setFormData] = React.useState({
     firstName: "",
@@ -32,10 +42,14 @@ function Try() {
     window.console.log("doc", document.getElementById("userName").value);
     event.preventDefault();
     setSignupData({ ...signupData, [event.target.name]: event.target.value });
-    dispatch(
-      checkUserAvailability({
-        userName: document.getElementById("userName").value,
-      })
+
+    debounce(
+      dispatch(
+        checkUserAvailability({
+          userName: document.getElementById("userName").value,
+        })
+      ),
+      1000
     );
   };
   const handleSubmitSignup = (event) => {
@@ -70,7 +84,7 @@ function Try() {
           type="text"
           name="userName"
           id="userName"
-          onChange={handleSignupChange}
+          onChange={debounce(handleSignupChange, 300)}
         />
         <p>is available: {state.available ? "True" : "False"}</p>
         <h2>Email</h2>
