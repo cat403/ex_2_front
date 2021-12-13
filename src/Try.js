@@ -5,6 +5,7 @@ import { console } from "./redux/actions";
 import { tryPost } from "./redux/actions";
 import { sendSignup } from "./redux/actions";
 import { checkUserAvailability } from "./redux/actions";
+import { clearErrorMessage } from "./redux/actions";
 function Try() {
   const debounce = (func, timeout = 300) => {
     let timer;
@@ -16,6 +17,7 @@ function Try() {
       }, timeout);
     };
   };
+
   let canYouSeeMe = useSelector((state) => state.canYouSeeMe);
   const [formData, setFormData] = React.useState({
     firstName: "",
@@ -56,6 +58,15 @@ function Try() {
     event.preventDefault();
     dispatch(sendSignup(signupData));
   };
+  const initClear = React.useCallback(() => {
+    dispatch(clearErrorMessage());
+  }, [dispatch]);
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      initClear();
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, [state.error, initClear]);
   return (
     <div>
       <h1>CAN BE SEEN : {canYouSeeMe}</h1>

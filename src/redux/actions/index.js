@@ -12,6 +12,9 @@ export const tryPost = (post) => async (dispatch) => {
     window.console.error(error);
   }
 };
+export const clearErrorMessage = () => (dispatch) => {
+  dispatch({ type: "CLEAR_ERROR" });
+};
 export const sendSignup = (userInfo) => async (dispatch) => {
   try {
     const response = await api.sendSignup(userInfo);

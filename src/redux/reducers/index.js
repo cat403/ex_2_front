@@ -15,6 +15,8 @@ const reducer = (
       };
     case "CHECK_DB_AVAILABILITY":
       return { ...state, available: action.payload.available };
+    case "CLEAR_ERROR":
+      return { ...state, error: null };
     default:
       return state;
   }
