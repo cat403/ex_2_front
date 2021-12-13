@@ -7,3 +7,5 @@ export const sendSignup = (userInfo) =>
   axios.post(`${url}login/new-user`, { ...userInfo, action: "signup" });
 export const checkUserAvailability = (info) =>
   axios.post(`${url}login/new-user`, { ...info, action: "check availability" });
+export const sendNutritionData = (nutritionData) =>
+  axios.post(`${url}nutrition`, { ...nutritionData });

@@ -31,3 +31,11 @@ export const checkUserAvailability = (info) => async (dispatch) => {
     console.log(error);
   }
 };
+export const sendNutritionData = (nutritionData) => async (dispatch) => {
+  try {
+    const response = await api.sendNutritionData(nutritionData);
+    dispatch({ type: "LOG_NUTRITION", payload: response.data });
+  } catch (error) {
+    window.console.error(error);
+  }
+};

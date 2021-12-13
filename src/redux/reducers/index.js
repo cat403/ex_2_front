@@ -17,6 +17,8 @@ const reducer = (
       return { ...state, available: action.payload.available };
     case "CLEAR_ERROR":
       return { ...state, error: null };
+    case "LOG_NUTRITION":
+      return { ...state, error: action.payload?.error };
     default:
       return state;
   }
