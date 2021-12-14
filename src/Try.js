@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { console } from "./redux/actions";
 import { tryPost } from "./redux/actions";
 import { sendSignup } from "./redux/actions";
+import { sendNutritionData } from "./redux/actions";
 import { checkUserAvailability } from "./redux/actions";
 import { clearErrorMessage } from "./redux/actions";
 function Try() {
@@ -73,6 +74,10 @@ function Try() {
       [event.target.name]: event.target.value,
     });
     window.console.log(nutritionData);
+  };
+  const handleNutritionSubmit = (event) => {
+    event.preventDefault();
+    dispatch(sendNutritionData(nutritionData));
   };
   //CREATE A FUNCTION FOR DISPATCH TO CLEAR WARNING IN USEEFFECT
   const initClear = React.useCallback(() => {
