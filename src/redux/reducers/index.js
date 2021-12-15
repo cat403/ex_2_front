@@ -18,7 +18,15 @@ const reducer = (
     case "CLEAR_ERROR":
       return { ...state, error: null };
     case "LOG_NUTRITION":
-      return { ...state, error: action.payload?.error };
+      return { ...state, ...action.payload };
+    case "GET_DAILY_NUTRITION":
+      return {
+        ...state,
+        meals: [...action.payload.meals],
+        totalCalories: action.payload.totalCalories,
+      };
+    case "SET_USERID":
+      return { ...state, userId: action.payload };
     default:
       return state;
   }

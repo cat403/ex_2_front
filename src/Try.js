@@ -7,6 +7,8 @@ import { sendSignup } from "./redux/actions";
 import { sendNutritionData } from "./redux/actions";
 import { checkUserAvailability } from "./redux/actions";
 import { clearErrorMessage } from "./redux/actions";
+import { setUserId } from "./redux/actions";
+import { getDailyNutrition } from "./redux/actions";
 function Try() {
   //DEBOUNCE DECLARE
   const debounce = (func, timeout = 300) => {
@@ -31,10 +33,10 @@ function Try() {
     email: "",
   });
   //NUTRITION FORM SAVE
-  const [nutritionData, setNutritionData] = React.useState({});
+  const [nutritionData, setNutritionData] = React.useState({ save: false });
   //GETTING THE STATE
   let state = useSelector((state) => state);
-  window.console.log(state);
+  window.console.log("STATE", state);
   //DISPATCH & NAVIGATE
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -73,11 +75,15 @@ function Try() {
       ...nutritionData,
       [event.target.name]: event.target.value,
     });
-    window.console.log(nutritionData);
   };
   const handleNutritionSubmit = (event) => {
     event.preventDefault();
     dispatch(sendNutritionData(nutritionData));
+  };
+  // GET NUTRITION
+  const getNutrition = (event) => {
+    event.preventDefault();
+    dispatch(getDailyNutrition(state.userId));
   };
   //CREATE A FUNCTION FOR DISPATCH TO CLEAR WARNING IN USEEFFECT
   const initClear = React.useCallback(() => {
@@ -134,7 +140,7 @@ function Try() {
           <p>I ate</p>
           <input
             type="text"
-            name="food-name"
+            name="foodName"
             id="food-name"
             onChange={handleNutritionChange}
           ></input>
@@ -150,12 +156,37 @@ function Try() {
             type="checkbox"
             id="save"
             name="save"
-            onChange={handleNutritionChange}
+            onChange={() => {
+              setNutritionData({ ...nutritionData, save: !nutritionData.save });
+            }}
           ></input>
           <p>save</p>
-          <button type="submit">Submit Nutrition</button>
+          <p>User id</p>
+          <input
+            type="text"
+            name="_id"
+            id="_id"
+            placeholder="61b4bb1d152f2614dc142aa8"
+            onChange={handleNutritionChange}
+          ></input>
+          <button type="submit" onClick={handleNutritionSubmit}>
+            Submit Nutrition
+          </button>
         </form>
       </div>
+      <h1>Get Nutrition data</h1>
+      <form>
+        <input id="setUsername"></input>
+        <button
+          onClick={(event) => {
+            event.preventDefault();
+            dispatch(setUserId(document.getElementById("setUsername").value));
+          }}
+        >
+          Set User Name
+        </button>
+      </form>
+      <button onClick={getNutrition}>GET NUTRITION</button>
     </div>
   );
 }
