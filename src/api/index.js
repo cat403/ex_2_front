@@ -11,3 +11,5 @@ export const sendNutritionData = (nutritionData) =>
   axios.post(`${url}nutrition`, { ...nutritionData });
 export const getDailyNutrition = (userId) =>
   axios.get(`${url}nutrition/${userId}`);
+export const deleteMeal = (userId, mealId) =>
+  axios.delete(`${url}nutrition/${userId}?meal=${mealId}`);

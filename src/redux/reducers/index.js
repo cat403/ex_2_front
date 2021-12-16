@@ -27,6 +27,8 @@ const reducer = (
       };
     case "SET_USERID":
       return { ...state, userId: action.payload };
+    case "DELETE_MEAL":
+      return { ...state, ...action.payload };
     default:
       return state;
   }

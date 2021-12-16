@@ -9,6 +9,7 @@ import { checkUserAvailability } from "./redux/actions";
 import { clearErrorMessage } from "./redux/actions";
 import { setUserId } from "./redux/actions";
 import { getDailyNutrition } from "./redux/actions";
+import { deleteMeal } from "./redux/actions";
 function Try() {
   //DEBOUNCE DECLARE
   const debounce = (func, timeout = 300) => {
@@ -34,6 +35,7 @@ function Try() {
   });
   //NUTRITION FORM SAVE
   const [nutritionData, setNutritionData] = React.useState({ save: false });
+  const [exerciseData, setExerciseData] = React.useState();
   //GETTING THE STATE
   let state = useSelector((state) => state);
   window.console.log("STATE", state);
@@ -79,6 +81,14 @@ function Try() {
   const handleNutritionSubmit = (event) => {
     event.preventDefault();
     dispatch(sendNutritionData(nutritionData));
+  };
+  // EXERCISE INPUT FUNCTIONS
+  const handleExerciseChange = (event) => {
+    event.preventDefault();
+    setExerciseData({
+      ...exerciseData,
+      [event.target.name]: event.target.value,
+    });
   };
   // GET NUTRITION
   const getNutrition = (event) => {
@@ -187,6 +197,44 @@ function Try() {
         </button>
       </form>
       <button onClick={getNutrition}>GET NUTRITION</button>
+      <h1>delete try</h1>
+      <input id="deleteRequest"></input>
+      <button
+        onClick={(event) => {
+          event.preventDefault();
+          dispatch(
+            deleteMeal(
+              state.userId,
+              document.getElementById("deleteRequest").value
+            )
+          );
+        }}
+      >
+        DELETE
+      </button>
+      <h1>Exerices</h1>
+      <form>
+        <p>
+          Repeat
+          <input name="repeat" onChange={handleExerciseChange}></input> Exercise
+          Name
+          <input name="exerciseName" onChange={handleExerciseChange}></input>
+          Exercise time
+          <input name="exerciseTime" onChange={handleExerciseChange}></input>
+          Break
+          <input name="breakTime" onChange={handleExerciseChange}></input>
+        </p>
+        <button
+          onClick={(event) => {
+            event.preventDefault();
+            window.console.log(exerciseData);
+          }}
+        >
+          Save
+        </button>
+        <button>Edit</button>
+        <button>Delete</button>
+      </form>
     </div>
   );
 }

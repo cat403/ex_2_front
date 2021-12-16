@@ -50,3 +50,11 @@ export const getDailyNutrition = (userId) => async (dispatch) => {
     window.console.error(error);
   }
 };
+export const deleteMeal = (userId, mealId) => async (dispatch) => {
+  try {
+    const response = await api.deleteMeal(userId, mealId);
+    dispatch({ type: "DELETE_MEAL", payload: response.data });
+  } catch (error) {
+    window.console.log(error);
+  }
+};
