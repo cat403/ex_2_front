@@ -10,6 +10,11 @@ import { clearErrorMessage } from "./redux/actions";
 import { setUserId } from "./redux/actions";
 import { getDailyNutrition } from "./redux/actions";
 import { deleteMeal } from "./redux/actions";
+import { sendExercise } from "./redux/actions";
+import { sendCaloriesBurned } from "./redux/actions";
+import { deleteExercise } from "./redux/actions";
+import { getExercises } from "./redux/actions";
+import { getCalories } from "./redux/actions";
 function Try() {
   //DEBOUNCE DECLARE
   const debounce = (func, timeout = 300) => {
@@ -94,6 +99,37 @@ function Try() {
   const getNutrition = (event) => {
     event.preventDefault();
     dispatch(getDailyNutrition(state.userId));
+  };
+  // EXERCISE FUNCTIONS
+  const handleExerciseSubmit = (event) => {
+    event.preventDefault();
+    dispatch(sendExercise(state.userId, exerciseData));
+  };
+  const handleCaloriesSubmit = (event) => {
+    event.preventDefault();
+    window.console.log(document.getElementById("caloriesBurned").value);
+    dispatch(
+      sendCaloriesBurned(state.userId, {
+        calories: document.getElementById("caloriesBurned").value,
+      })
+    );
+  };
+  const handleDeleteExercise = (event) => {
+    event.preventDefault();
+    dispatch(
+      deleteExercise(
+        state.userId,
+        document.getElementById("exerciseDelete").value
+      )
+    );
+  };
+  const handleGetExercises = (event) => {
+    event.preventDefault();
+    dispatch(getExercises(state.userId));
+  };
+  const handleGetCalories = (event) => {
+    event.preventDefault();
+    dispatch(getCalories(state.userId));
   };
   //CREATE A FUNCTION FOR DISPATCH TO CLEAR WARNING IN USEEFFECT
   const initClear = React.useCallback(() => {
@@ -216,6 +252,11 @@ function Try() {
       <form>
         <p>
           Repeat
+          <input
+            name="routine"
+            onChange={handleExerciseChange}
+            placeholder="routine"
+          ></input>
           <input name="repeat" onChange={handleExerciseChange}></input> Exercise
           Name
           <input name="exerciseName" onChange={handleExerciseChange}></input>
@@ -224,17 +265,17 @@ function Try() {
           Break
           <input name="breakTime" onChange={handleExerciseChange}></input>
         </p>
-        <button
-          onClick={(event) => {
-            event.preventDefault();
-            window.console.log(exerciseData);
-          }}
-        >
-          Save
-        </button>
+        <button onClick={handleExerciseSubmit}>Save</button>
         <button>Edit</button>
-        <button>Delete</button>
+        <input id="exerciseDelete"></input>
+        <button onClick={handleDeleteExercise}>Delete</button>
       </form>
+      <button onClick={handleGetExercises}>Get Exercise</button>
+      <h1>Calories</h1>
+      <p>{state.calories}</p>
+      <button onClick={handleGetCalories}>Get Calories</button>
+      <input id="caloriesBurned"></input>
+      <button onClick={handleCaloriesSubmit}>Send Calories</button>
     </div>
   );
 }

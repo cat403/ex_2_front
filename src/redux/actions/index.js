@@ -58,3 +58,46 @@ export const deleteMeal = (userId, mealId) => async (dispatch) => {
     window.console.log(error);
   }
 };
+export const sendExercise = (userId, exercise) => async (dispatch) => {
+  try {
+    const response = await api.sendExercise(userId, exercise);
+    dispatch({ type: "LOG_EXERCISE", payload: response.data });
+  } catch (error) {
+    window.console.log(error);
+  }
+};
+export const sendCaloriesBurned = (userId, caloriesBurned) => async (
+  dispatch
+) => {
+  try {
+    const response = await api.sendCaloriesBurned(userId, caloriesBurned);
+    dispatch({ type: "LOG_CALORIES", payload: response.data });
+  } catch (error) {
+    window.console.log(error);
+  }
+};
+
+export const deleteExercise = (userId, exerciseId) => async (dispatch) => {
+  try {
+    const response = await api.deleteExercise(userId, exerciseId);
+    dispatch({ type: "DELETE_EXERCISE", payload: response.data });
+  } catch (error) {
+    window.console.log(error);
+  }
+};
+export const getExercises = (userId) => async (dispatch) => {
+  try {
+    const response = await api.getExercises(userId);
+    dispatch({ type: "GET_EXERCISES", payload: response.data });
+  } catch (error) {
+    window.console.log(error);
+  }
+};
+export const getCalories = (userId) => async (dispatch) => {
+  try {
+    const response = await api.getCalories(userId);
+    dispatch({ type: "GET_CALORIES", payload: response.data });
+  } catch (error) {
+    window.console.log(error);
+  }
+};

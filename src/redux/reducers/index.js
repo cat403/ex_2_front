@@ -29,6 +29,17 @@ const reducer = (
       return { ...state, userId: action.payload };
     case "DELETE_MEAL":
       return { ...state, ...action.payload };
+    case "LOG_EXERCISE":
+      return { ...state, ...action.payload };
+    case "LOG_CALORIES":
+      return { ...state, ...action.payload };
+    case "DELETE_EXERCISE":
+      return { ...state, ...action.payload };
+    case "GET_EXERCISES":
+      return { ...state, ...action.payload };
+    case "GET_CALORIES":
+      return { ...state, ...action.payload };
+
     default:
       return state;
   }
