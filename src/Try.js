@@ -15,6 +15,7 @@ import { sendCaloriesBurned } from "./redux/actions";
 import { deleteExercise } from "./redux/actions";
 import { getExercises } from "./redux/actions";
 import { getCalories } from "./redux/actions";
+import { sendSignin } from "./redux/actions";
 function Try() {
   //DEBOUNCE DECLARE
   const debounce = (func, timeout = 300) => {
@@ -37,7 +38,9 @@ function Try() {
   const [signupData, setSignupData] = React.useState({
     userName: "",
     email: "",
+    password: "",
   });
+
   //NUTRITION FORM SAVE
   const [nutritionData, setNutritionData] = React.useState({ save: false });
   const [exerciseData, setExerciseData] = React.useState();
@@ -47,6 +50,16 @@ function Try() {
   //DISPATCH & NAVIGATE
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  //SIGNIN
+  const handleSignin = (event) => {
+    event.preventDefault();
+    dispatch(
+      sendSignin({
+        userName: document.getElementById("signinName").value,
+        password: document.getElementById("signinPass").value,
+      })
+    );
+  };
   //TRY INPUT FUNCTIONS
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
@@ -59,7 +72,7 @@ function Try() {
   };
   //SIGNUP INPUT FUNCTIONS
   const handleSignupChange = (event) => {
-    window.console.log("doc", document.getElementById("userName").value);
+    window.console.log("doc", signupData);
     event.preventDefault();
     setSignupData({ ...signupData, [event.target.name]: event.target.value });
 
@@ -107,7 +120,6 @@ function Try() {
   };
   const handleCaloriesSubmit = (event) => {
     event.preventDefault();
-    window.console.log(document.getElementById("caloriesBurned").value);
     dispatch(
       sendCaloriesBurned(state.userId, {
         calories: document.getElementById("caloriesBurned").value,
@@ -161,6 +173,12 @@ function Try() {
         </button>
       </form>
       <h1>USER TEST</h1>
+      <h1>SIGN IN</h1>
+      <p>
+        Name
+        <input id="signinName"></input>Password <input id="signinPass"></input>
+      </p>
+      <button onClick={handleSignin}>Submit Sign in</button>
       <p>User Name : {state.userName}</p>
       <p>User Id: {state._id} </p>
       <p>ERROR: {state.error}</p>
@@ -175,6 +193,8 @@ function Try() {
         <p>is available: {state.available ? "True" : "False"}</p>
         <h2>Email</h2>
         <input type="email" name="email" onChange={handleSignupChange} />
+        <h2>Password</h2>
+        <input type="password" name="password" onChange={handleSignupChange} />
         <br />
         <button type="submit" onClick={handleSubmitSignup}>
           Submit Signup

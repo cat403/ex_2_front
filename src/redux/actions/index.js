@@ -18,6 +18,15 @@ export const clearErrorMessage = () => (dispatch) => {
 export const setUserId = (userId) => (dispatch) => {
   dispatch({ type: "SET_USERID", payload: userId });
 };
+export const sendSignin = (userInfo) => async (dispatch) => {
+  try {
+    const response = await api.sendSignin(userInfo);
+    window.console.log(response);
+    dispatch({ type: "SIGNIN", payload: response.data });
+  } catch (error) {
+    window.console.log(error);
+  }
+};
 export const sendSignup = (userInfo) => async (dispatch) => {
   try {
     const response = await api.sendSignup(userInfo);

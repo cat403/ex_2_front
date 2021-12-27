@@ -8,6 +8,8 @@ const reducer = (
       return state;
     case "TRYPOST":
       return { ...action.payload, canYouSeeMe: action.payload.firstName };
+    case "SIGNIN":
+      return { ...state, ...action.payload };
     case "REGISTER":
       return {
         ...state,
