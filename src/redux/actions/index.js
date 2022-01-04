@@ -22,9 +22,13 @@ export const setUserId = (userId) => (dispatch) => {
 //auth
 export const sendSignin = (userInfo) => async (dispatch) => {
   try {
+    const twoHours = 7200000;
     const response = await api.sendSignin(userInfo);
     localStorage.setItem("jwt", response.data.token);
     dispatch({ type: "SIGNIN", payload: response.data });
+    setTimeout(() => {
+      dispatch({ type: "LOG_OUT" });
+    }, twoHours);
   } catch (error) {
     window.console.log(error);
   }
@@ -33,6 +37,10 @@ export const sendSignup = (userInfo) => async (dispatch) => {
   try {
     const response = await api.sendSignup(userInfo);
     dispatch({ type: "REGISTER", payload: response.data });
+    const twoHours = 7200000;
+    setTimeout(() => {
+      dispatch({ type: "LOG_OUT" });
+    }, twoHours);
   } catch (error) {
     window.console.error(error);
   }

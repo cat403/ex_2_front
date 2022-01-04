@@ -156,10 +156,7 @@ function Try() {
     }, 2000);
     return () => clearTimeout(timer);
   }, [state.error, initClear]);
-  //USEEFFECT TO AUTO LOGOUT
-  // React.useEffect(() => {
-  //   setTimeout(,)
-  // }, [state.user]);
+
   return (
     <div>
       <h1>CAN BE SEEN : {canYouSeeMe}</h1>
