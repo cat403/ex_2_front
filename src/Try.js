@@ -16,6 +16,7 @@ import { deleteExercise } from "./redux/actions";
 import { getExercises } from "./redux/actions";
 import { getCalories } from "./redux/actions";
 import { sendSignin } from "./redux/actions";
+import { logOut } from "./redux/actions";
 function Try() {
   //DEBOUNCE DECLARE
   const debounce = (func, timeout = 300) => {
@@ -120,8 +121,9 @@ function Try() {
   };
   const handleCaloriesSubmit = (event) => {
     event.preventDefault();
+    window.console.log(state.user._id);
     dispatch(
-      sendCaloriesBurned(state.userId, {
+      sendCaloriesBurned(state.user._id, {
         calories: document.getElementById("caloriesBurned").value,
       })
     );
@@ -154,6 +156,10 @@ function Try() {
     }, 2000);
     return () => clearTimeout(timer);
   }, [state.error, initClear]);
+  //USEEFFECT TO AUTO LOGOUT
+  // React.useEffect(() => {
+  //   setTimeout(,)
+  // }, [state.user]);
   return (
     <div>
       <h1>CAN BE SEEN : {canYouSeeMe}</h1>
@@ -296,6 +302,13 @@ function Try() {
       <button onClick={handleGetCalories}>Get Calories</button>
       <input id="caloriesBurned"></input>
       <button onClick={handleCaloriesSubmit}>Send Calories</button>
+      <button
+        onClick={() => {
+          dispatch(logOut());
+        }}
+      >
+        Log Out
+      </button>
     </div>
   );
 }

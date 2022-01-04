@@ -12,16 +12,18 @@ export const tryPost = (post) => async (dispatch) => {
     window.console.error(error);
   }
 };
+//utilities
 export const clearErrorMessage = () => (dispatch) => {
   dispatch({ type: "CLEAR_ERROR" });
 };
 export const setUserId = (userId) => (dispatch) => {
   dispatch({ type: "SET_USERID", payload: userId });
 };
+//auth
 export const sendSignin = (userInfo) => async (dispatch) => {
   try {
     const response = await api.sendSignin(userInfo);
-    window.console.log(response);
+    localStorage.setItem("jwt", response.data.token);
     dispatch({ type: "SIGNIN", payload: response.data });
   } catch (error) {
     window.console.log(error);
@@ -43,6 +45,11 @@ export const checkUserAvailability = (info) => async (dispatch) => {
     console.log(error);
   }
 };
+export const logOut = () => (dispatch) => {
+  localStorage.clear();
+  dispatch({ type: "LOG_OUT" });
+};
+//nutrition
 export const sendNutritionData = (nutritionData) => async (dispatch) => {
   try {
     const response = await api.sendNutritionData(nutritionData);
@@ -67,6 +74,7 @@ export const deleteMeal = (userId, mealId) => async (dispatch) => {
     window.console.log(error);
   }
 };
+//exercise
 export const sendExercise = (userId, exercise) => async (dispatch) => {
   try {
     const response = await api.sendExercise(userId, exercise);
@@ -102,6 +110,7 @@ export const getExercises = (userId) => async (dispatch) => {
     window.console.log(error);
   }
 };
+//calories
 export const getCalories = (userId) => async (dispatch) => {
   try {
     const response = await api.getCalories(userId);

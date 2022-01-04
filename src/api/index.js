@@ -10,18 +10,39 @@ export const sendSignin = (userInfo) =>
 export const checkUserAvailability = (info) =>
   axios.post(`${url}login/new-user`, { ...info, action: "check availability" });
 export const sendNutritionData = (nutritionData) =>
-  axios.post(`${url}nutrition`, { ...nutritionData });
+  axios.post(
+    `${url}nutrition`,
+    { ...nutritionData },
+    {
+      headers: { Authorization: localStorage.getItem("jwt") },
+    }
+  );
 export const getDailyNutrition = (userId) =>
-  axios.get(`${url}nutrition/${userId}`);
+  axios.get(`${url}nutrition/${userId}`, {
+    headers: { Authorization: localStorage.getItem("jwt") },
+  });
 export const deleteMeal = (userId, mealId) =>
-  axios.delete(`${url}nutrition/${userId}?meal=${mealId}`);
+  axios.delete(`${url}nutrition/${userId}?meal=${mealId}`, {
+    headers: { Authorization: localStorage.getItem("jwt") },
+  });
 export const sendExercise = (userId, exercise) => {
-  axios.post(`${url}fitness/${userId}`, exercise);
+  axios.post(`${url}fitness/${userId}`, exercise, {
+    headers: { Authorization: localStorage.getItem("jwt") },
+  });
 };
 export const sendCaloriesBurned = (userId, caloriesBurned) =>
-  axios.post(`${url}fitness/${userId}/calories`, caloriesBurned);
+  axios.post(`${url}fitness/${userId}/calories`, caloriesBurned, {
+    headers: { Authorization: localStorage.getItem("jwt") },
+  });
 export const deleteExercise = (userId, exerciseId) =>
-  axios.delete(`${url}fitness/${userId}?exercise=${exerciseId}`);
-export const getExercises = (userId) => axios.get(`${url}fitness/${userId}`);
+  axios.delete(`${url}fitness/${userId}?exercise=${exerciseId}`, {
+    headers: { Authorization: localStorage.getItem("jwt") },
+  });
+export const getExercises = (userId) =>
+  axios.get(`${url}fitness/${userId}`, {
+    headers: { Authorization: localStorage.getItem("jwt") },
+  });
 export const getCalories = (userId) =>
-  axios.get(`${url}fitness/${userId}/calories`);
+  axios.get(`${url}fitness/${userId}/calories`, {
+    headers: { Authorization: localStorage.getItem("jwt") },
+  });
