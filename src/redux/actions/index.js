@@ -25,6 +25,7 @@ export const sendSignin = (userInfo) => async (dispatch) => {
     const twoHours = 7200000;
     const response = await api.sendSignin(userInfo);
     localStorage.setItem("jwt", response.data.token);
+    localStorage.setItem("id", response.data.user._id);
     dispatch({ type: "SIGNIN", payload: response.data });
     setTimeout(() => {
       dispatch({ type: "LOG_OUT" });
@@ -37,6 +38,8 @@ export const sendSignup = (userInfo) => async (dispatch) => {
   try {
     const response = await api.sendSignup(userInfo);
     dispatch({ type: "REGISTER", payload: response.data });
+    localStorage.setItem("jwt", response.data.token);
+    localStorage.setItem("id", response.data.user._id);
     const twoHours = 7200000;
     setTimeout(() => {
       dispatch({ type: "LOG_OUT" });
