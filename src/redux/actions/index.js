@@ -28,6 +28,7 @@ export const sendSignin = (userInfo) => async (dispatch) => {
     localStorage.setItem("id", response.data.user._id);
     dispatch({ type: "SIGNIN", payload: response.data });
     setTimeout(() => {
+      localStorage.clear();
       dispatch({ type: "LOG_OUT" });
     }, twoHours);
   } catch (error) {
@@ -42,6 +43,7 @@ export const sendSignup = (userInfo) => async (dispatch) => {
     localStorage.setItem("id", response.data.user._id);
     const twoHours = 7200000;
     setTimeout(() => {
+      localStorage.clear();
       dispatch({ type: "LOG_OUT" });
     }, twoHours);
   } catch (error) {

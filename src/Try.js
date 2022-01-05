@@ -17,7 +17,13 @@ import { getExercises } from "./redux/actions";
 import { getCalories } from "./redux/actions";
 import { sendSignin } from "./redux/actions";
 import { logOut } from "./redux/actions";
+import Popups from "./components/Popups";
 function Try() {
+  //toggle popup
+  const [isPopupOpen, setIsPopupOpen] = React.useState(false);
+  const handlePopupToggle = () => {
+    setIsPopupOpen(!isPopupOpen);
+  };
   //DEBOUNCE DECLARE
   const debounce = (func, timeout = 300) => {
     let timer;
@@ -306,6 +312,50 @@ function Try() {
       >
         Log Out
       </button>
+      <button onClick={handlePopupToggle}>PopUp</button>
+      {isPopupOpen && (
+        <Popups
+          handleClose={handlePopupToggle}
+          content={
+            <p>
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptas
+              commodi ducimus optio ipsa reiciendis illum eos magnam nemo natus,
+              atque excepturi explicabo! Ipsum blanditiis deserunt laboriosam
+              mollitia, distinctio ad saepe aliquam sunt ex, laborum atque nihil
+              velit maxime. Esse sint ipsam excepturi ipsa reiciendis aliquam
+              atque, voluptatibus quo illum minima. Lorem ipsum dolor sit, amet
+              consectetur adipisicing elit. Voluptas commodi ducimus optio ipsa
+              reiciendis illum eos magnam nemo natus, atque excepturi explicabo!
+              Ipsum blanditiis deserunt laboriosam mollitia, distinctio ad saepe
+              aliquam sunt ex, laborum atque nihil velit maxime. Esse sint ipsam
+              excepturi ipsa reiciendis aliquam atque, voluptatibus quo illum
+              minima. Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+              Voluptas commodi ducimus optio ipsa reiciendis illum eos magnam
+              nemo natus, atque excepturi explicabo! Ipsum blanditiis deserunt
+              laboriosam mollitia, distinctio ad saepe aliquam sunt ex, laborum
+              atque nihil velit maxime. Esse sint ipsam excepturi ipsa
+              reiciendis aliquam atque, voluptatibus quo illum minima. Lorem
+              ipsum dolor sit, amet consectetur adipisicing elit. Voluptas
+              commodi ducimus optio ipsa reiciendis illum eos magnam nemo natus,
+              atque excepturi explicabo! Ipsum blanditiis deserunt laboriosam
+              mollitia, distinctio ad saepe aliquam sunt ex, laborum atque nihil
+              velit maxime. Esse sint ipsam excepturi ipsa reiciendis aliquam
+              atque, voluptatibus quo illum minima. Lorem ipsum dolor sit, amet
+              consectetur adipisicing elit. Voluptas commodi ducimus optio ipsa
+              reiciendis illum eos magnam nemo natus, atque excepturi explicabo!
+              Ipsum blanditiis deserunt laboriosam mollitia, distinctio ad saepe
+              aliquam sunt ex, laborum atque nihil velit maxime. Esse sint ipsam
+              excepturi ipsa reiciendis aliquam atque, voluptatibus quo illum
+              minima. Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+              Voluptas commodi ducimus optio ipsa reiciendis illum eos magnam
+              nemo natus, atque excepturi explicabo! Ipsum blanditiis deserunt
+              laboriosam mollitia, distinctio ad saepe aliquam sunt ex, laborum
+              atque nihil velit maxime. Esse sint ipsam excepturi ipsa
+              reiciendis aliquam atque, voluptatibus quo illum minima.
+            </p>
+          }
+        ></Popups>
+      )}
     </div>
   );
 }
