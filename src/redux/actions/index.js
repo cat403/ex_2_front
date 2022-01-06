@@ -19,18 +19,28 @@ export const clearErrorMessage = () => (dispatch) => {
 export const setUserId = (userId) => (dispatch) => {
   dispatch({ type: "SET_USERID", payload: userId });
 };
+//poplate user state
+export const getUserInfo = (userId) => async (dispatch) => {
+  try {
+    const response = await api.getUserInfo(userId);
+    dispatch({ type: "GET_USER", payload: response.data });
+  } catch (error) {
+    window.console.error(error);
+  }
+};
 //auth
 export const sendSignin = (userInfo) => async (dispatch) => {
+  const clearUser = () => {
+    localStorage.clear();
+    dispatch({ type: "LOG_OUT" });
+  };
   try {
     const twoHours = 7200000;
     const response = await api.sendSignin(userInfo);
     localStorage.setItem("jwt", response.data.token);
     localStorage.setItem("id", response.data.user._id);
     dispatch({ type: "SIGNIN", payload: response.data });
-    setTimeout(() => {
-      localStorage.clear();
-      dispatch({ type: "LOG_OUT" });
-    }, twoHours);
+    setTimeout(clearUser, twoHours);
   } catch (error) {
     window.console.log(error);
   }
@@ -38,14 +48,15 @@ export const sendSignin = (userInfo) => async (dispatch) => {
 export const sendSignup = (userInfo) => async (dispatch) => {
   try {
     const response = await api.sendSignup(userInfo);
+    const clearUser = () => {
+      localStorage.clear();
+      dispatch({ type: "LOG_OUT" });
+    };
     dispatch({ type: "REGISTER", payload: response.data });
     localStorage.setItem("jwt", response.data.token);
     localStorage.setItem("id", response.data.user._id);
     const twoHours = 7200000;
-    setTimeout(() => {
-      localStorage.clear();
-      dispatch({ type: "LOG_OUT" });
-    }, twoHours);
+    setTimeout(clearUser, twoHours);
   } catch (error) {
     window.console.error(error);
   }

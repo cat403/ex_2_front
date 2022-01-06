@@ -3,6 +3,10 @@ import axios from "axios";
 const url = "http://localhost:8000/";
 
 export const tryPost = (data) => axios.post(`${url}try`, data);
+export const getUserInfo = (userId) =>
+  axios.get(`${url}login/existing-user/${userId}`, {
+    headers: { Authorization: localStorage.getItem("jwt") },
+  });
 export const sendSignup = (userInfo) =>
   axios.post(`${url}login/new-user`, { ...userInfo, action: "signup" });
 export const sendSignin = (userInfo) =>

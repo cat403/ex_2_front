@@ -14,6 +14,8 @@ const reducer = (state = {}, action) => {
         ...state,
         ...action.payload,
       };
+    case "GET_USER":
+      return { ...state, user: { ...action.payload } };
     case "CHECK_DB_AVAILABILITY":
       return { ...state, available: action.payload.available };
     case "CLEAR_ERROR":

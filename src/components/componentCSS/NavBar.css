@@ -1,0 +1,19 @@
+.navbar {
+  background-color: blue;
+  height: 7vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.navbar-nav {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+}
+.navbar-nav li {
+  margin: 0 0.5rem 0 0;
+}
+.navbar-nav li a {
+  color: inherit;
+  text-decoration: inherit;
+}
