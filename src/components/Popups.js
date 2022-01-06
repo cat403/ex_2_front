@@ -1,5 +1,5 @@
 import React from "react";
-
+import "./componentCSS/Popup.css";
 function Popups({ content, handleClose }) {
   //props handle-close content
   return (

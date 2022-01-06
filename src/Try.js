@@ -164,7 +164,7 @@ function Try() {
   }, [state.error, initClear]);
 
   return (
-    <div>
+    <div className="Try">
       <h1>CAN BE SEEN : {canYouSeeMe}</h1>
       <form>
         <h2>First Name</h2>

@@ -19,23 +19,30 @@ function NavBar() {
   let user = useSelector((state) => state.user);
   return (
     <nav className="navbar">
-      {isLoggedIn && user ? (
-        <ul className="navbar-nav">
-          <li>
-            <Link to="/">{user?.userName}</Link>
-          </li>
-          <li>
-            <Link to="/try">Try</Link>
-          </li>
-          <li>HELLLLLO {user?.userName}</li>
-          <li>HELLLLLO {user?.userName}</li>
-          <li>HELLLLLO {user?.userName}</li>
-        </ul>
-      ) : (
-        <ul className="navbar-nav">
-          <li>sign in</li> <li>log in</li>
-        </ul>
-      )}
+      <div className="navbar-content-container">
+        <div className="navbar-logo">
+          <Link to="/">Exercise App</Link>
+        </div>
+        {isLoggedIn && user ? (
+          <ul className="navbar-nav">
+            <li>
+              <Link to="/try">Fitness</Link>
+            </li>
+            <li>
+              <Link to="/try">Nutrition</Link>
+            </li>
+            <li>
+              <Link to="/">{user?.userName}</Link>
+            </li>
+            <button className="signout-btn">Sign out</button>
+          </ul>
+        ) : (
+          <ul className="navbar-nav">
+            <button className="signin-btn">Sign in</button>
+            <button className="signup-btn">Sign up</button>
+          </ul>
+        )}
+      </div>
     </nav>
   );
 }

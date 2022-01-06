@@ -1,6 +1,20 @@
 .navbar {
-  background-color: blue;
+  background: linear-gradient(
+    rgba(10, 173, 191, 0.99) 80%,
+    rgba(10, 173, 191, 0.9)
+  );
+  border-radius: 0 0 7px 7px;
+  position: fixed;
+  top: 0;
   height: 7vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.navbar-content-container {
+  max-width: 1000px;
+  width: 100vw;
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -10,10 +24,38 @@
   display: flex;
   flex-direction: row;
 }
+
+.navbar-logo {
+  margin-right: auto;
+  padding: 0 0 0 1rem;
+}
 .navbar-nav li {
-  margin: 0 0.5rem 0 0;
+  margin: 0 1rem 0 0;
+  display: flex;
+  align-items: center;
 }
 .navbar-nav li a {
+  position: relative;
   color: inherit;
   text-decoration: inherit;
+}
+
+.navbar-nav li ::before {
+  content: "";
+  height: 3px;
+  width: 98%;
+  position: absolute;
+  bottom: 0;
+  left: 1%;
+  background-color: black;
+  transform: scaleX(0);
+  transition: all 0.3s ease-in;
+}
+.navbar-nav li:hover ::before {
+  background-color: black;
+  transform: scaleX(1);
+  left: 1%;
+}
+.signout-btn {
+  margin: 0 1rem 0 0;
 }
