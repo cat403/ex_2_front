@@ -19,7 +19,9 @@ function NavBar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   React.useEffect(() => {
-    dispatch(getUserInfo(localStorage.getItem("id")));
+    if (localStorage.getItem("jwt")) {
+      dispatch(getUserInfo(localStorage.getItem("id")));
+    }
   }, []);
 
   let user = useSelector((state) => state.user);
