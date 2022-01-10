@@ -5,9 +5,9 @@ function Popups({ content, handleClose }) {
   return (
     <div className="popup-background">
       <div className="popup">
-        <span className="close-icon" onClick={handleClose}>
+        <div className="close-icon" onClick={handleClose}>
           X
-        </span>
+        </div>
         <div className="popup-content">{content}</div>
       </div>
     </div>

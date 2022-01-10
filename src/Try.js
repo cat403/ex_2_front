@@ -18,6 +18,7 @@ import { getCalories } from "./redux/actions";
 import { sendSignin } from "./redux/actions";
 import { logOut } from "./redux/actions";
 import Popups from "./components/Popups";
+import RadialProgressBar from "./components/RadialProgressBar";
 function Try() {
   //toggle popup
   const [isPopupOpen, setIsPopupOpen] = React.useState(false);
@@ -164,7 +165,7 @@ function Try() {
   }, [state.error, initClear]);
 
   return (
-    <div className="Try">
+    <div className="Try" style={{ background: "white" }}>
       <h1>CAN BE SEEN : {canYouSeeMe}</h1>
       <form>
         <h2>First Name</h2>
@@ -356,6 +357,11 @@ function Try() {
           }
         ></Popups>
       )}
+      <RadialProgressBar
+        numerator={11}
+        denominator={10}
+        title={"How Much I Ate Today"}
+      />
     </div>
   );
 }

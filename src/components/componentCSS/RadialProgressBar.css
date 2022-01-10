@@ -1,0 +1,31 @@
+.radial-progress-bar-container {
+  min-height: 5rem;
+  min-width: 5rem;
+  padding: 2rem;
+  background: inherit;
+}
+.radial-progress-bar-border {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid black;
+  border-radius: 7px;
+}
+.radial-progress-bar-title {
+  position: absolute;
+  background-color: white;
+  top: -1rem;
+  border: 2px solid black;
+  border-radius: 7px;
+  padding: 0.25rem;
+}
+.radial-progress-bar {
+  margin: 1.5rem 1rem 1rem 1rem;
+  min-width: 4rem;
+  min-height: 4rem;
+  border: 5px solid black;
+  border-radius: 50%;
+  border-style: ridge;
+}

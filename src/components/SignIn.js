@@ -15,12 +15,13 @@ function SignIn({ handleClose }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(sendSignin({ ...formData }));
+  };
+  React.useEffect(() => {
     if (user?.userName) {
       navigate("/");
       handleClose();
     }
-  };
-
+  }, [user]);
   return (
     <div className="signin-container">
       <form>
